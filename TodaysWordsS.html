@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vocabulary</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-size: 28pt;
+}
+
+.flip-card {
+    display: inline-block;
+  background-color: transparent;
+  width: 360px;
+  height: 190px;
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.4s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+
+}
+
+.flip-card-front {
+  background-color: orchid;
+  color: black;
+  font-family: Bookman Old Style;
+  font-size: 22pt;  
+}
+
+.flip-card-back {
+  background-color: #bd9067;
+  font-family: MS Gothic;
+  font-size: 16pt;
+  transform: rotateY(180deg);
+  color: white;
+}
+
+#grad1 {
+  background-color:#f87cac;
+  background-image: linear-gradient(to bottom right, rgb(252, 215, 221), #f72e7b);
+}
+
+#grad2 {
+  background-color:rgb(243, 250, 144);
+  background-image: linear-gradient(lightgoldenrodyellow, rgb(236, 248, 63));
+}
+
+#grad3 {
+  background-color: lightskyblue;
+  background-image: linear-gradient(to bottom left,rgb(214, 236, 250), rgb(33, 167, 250));
+}
+
+#grad4 {
+  background-color: #f8c1ac;
+  background-image: linear-gradient(to bottom left, #fc7d4c, #fce8e0);
+}
+
+#grad5 {
+  background-color:palegreen;
+  background-image: linear-gradient(rgb(83, 250, 83), rgb(221, 250, 221));
+}
+
+#grad6 {
+  background-color: rgb(248, 142, 239);
+  background-image: linear-gradient(to left, rgb(250, 220, 250), rgb(248, 142, 239));
+}
+
+.word {
+  padding: 35px;
+}
+
+.meaning {
+  padding: 25px;
+}
+</style>
+
+<script>
+    function loadWords() {
+      var wordList = ['amaze','amusing','analyze','annoy','arranged','avoid'];
+      var meaningsList = ['surprise','funny and interesting','study the parts of something in detail','disturb or irritate someone','put (things) properly, plan (event)','keep away from (someone / something)'];
+      var i;
+      for (i = 1; i < 7; i++) {
+        document.getElementById("word" + i).innerText = wordList[i-1];
+        document.getElementById("meaning" + i).innerText = meaningsList[i-1];
+      }
+    }
+</script>
+</head>
+<body onload="loadWords()">
+<p style="text-align: center; font-family: Kristen ITC;">Today's Words for Sahasra</p>
+<div class="flip-card">
+  <div class="flip-card-inner">
+    <div id="grad1" class="flip-card-front">
+      <!-- <div style=" " class="flip-card-front"> -->
+      <p id="word1" class="word">Akshara</p>
+    </div>
+    <div class="flip-card-back">
+      <p id="meaning1" class="meaning"><small>(Meaning)</small><br><br>Awesome girl</p> 
+    </div>
+  </div>
+</div>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<div class="flip-card">
+    <div class="flip-card-inner">
+      <div id="grad2" class="flip-card-front">
+        <!-- <div style="" class="flip-card-front"> -->
+        <p id="word2" class="word">Family</p>
+      </div>
+      <div class="flip-card-back">
+        <p id="meaning2" class="meaning"><small>(Meaning)</small><br><br>Love</p>
+      </div>
+    </div>
+  </div>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div id="grad3" class="flip-card-front">
+        <!-- <div style=" " class="flip-card-front"> -->
+        <p id="word3" class="word">Sahasra</p>
+      </div>
+      <div class="flip-card-back">
+        <p id="meaning3" class="meaning"><small>(Meaning)</small><br><br>Cute</p>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div id="grad4" class="flip-card-front">
+        <!-- <div style="" class="flip-card-front"> -->
+        <p id="word4" class="word">Amma</p>
+      </div>
+      <div class="flip-card-back">
+        <p id="meaning4" class="meaning"><small>(Meaning)</small><br><br>Dont know</p>
+      </div>
+    </div>
+  </div>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div id="grad5" class="flip-card-front">
+        <!-- <div style="" class="flip-card-front"> -->
+        <p id="word5" class="word">Play</p>
+      </div>
+      <div class="flip-card-back">
+        <p id="meaning5" class="meaning"><small>(Meaning)</small><br><br>Fun</p>
+      </div>
+    </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div id="grad6" class="flip-card-front">
+          <!-- <div style="" class="flip-card-front"> -->
+          <p id="word6" class="word">Appa</p>
+        </div>
+        <div class="flip-card-back">
+          <p id="meaning6" class="meaning"><small>(Meaning)</small><br><br>Funny</p>
+        </div>
+      </div>
+      </div>
+</body>
+</html>
