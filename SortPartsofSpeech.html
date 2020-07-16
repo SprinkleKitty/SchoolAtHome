@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sort Parts of Speech</title>
+    <style>
+        body {
+            font-family: Verdana, sans-serif;  
+            font-size: 20pt;
+        }
+
+        .dots {
+            border: 3px solid slateblue;
+            outline: slateblue dotted 6px;
+        }
+
+        .around {
+            border: 1px inset turquoise;
+            outline: turquoise groove 6px;
+        }
+
+        .dashes {
+            border: 2px solid fuchsia;
+            outline: fuchsia dashed 5px;
+        }
+
+        .thick {
+            border: 2px double gold;
+            outline: goldenrod double 6px;
+            outline-offset: 2px;
+        }
+
+        .setWidth {
+            width: 300px;
+            height: 100px;
+            padding: 10px;
+            text-align: center;
+            background-color:lightgoldenrodyellow;
+            margin: 10px;
+        }
+
+        .sidenav {
+        height: 100%;
+        width: 200px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: whitesmoke;
+        overflow-x: hidden;
+        }
+
+        button {
+            background-color: darkorchid;
+            border: none;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: auto;
+            cursor: pointer;
+            width: 200px;
+            height: 90px;
+        }
+
+        .result {
+            color: red;
+            font-size: 22pt;
+            width: 200px;
+        }
+
+        .sidenav button:hover {
+            background-color: plum;
+            color: black;
+        }
+
+        .content {
+            margin-left: 200px;
+            padding-left: 20px;
+        }
+    </style>
+    <script>
+        var intSelPattern = -1;
+        var List1 = ["Chair", "School", "Carrington", "Lion", "Balloon", "Bulb"]; /*Nouns*/
+        var List2 = ["Sort", "Know", "Talk", "Painted", "Listen", "Wrote"]; /*Verbs*/
+
+        function displayWords() {
+            var NonList = ["Pink", "Smart", "She", "It", "And", "Quickly"]; /*Others*/
+            var AllWordsList = [...List1, ...List2, ...NonList];
+            shuffle(AllWordsList);
+            var allElems = document.getElementsByTagName("p");
+            for (let i = 0; i < allElems.length; i++ ) {
+                allElems[i].innerText = AllWordsList[i];
+            }
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function checkWords() {
+            let allOK = true;
+
+            let selElems = document.getElementsByClassName(getClassName(0));
+            if (List1.length != selElems.length) allOK = false;
+            else {
+                for (let i = 0; i < selElems.length; i++ ) {
+                    if (!List1.includes(selElems[i].innerText)) {
+                        allOK = false;
+                        break;
+                    }
+                }
+            }
+
+            if (allOK) {
+                selElems = document.getElementsByClassName(getClassName(2));
+                if (List2.length != selElems.length) allOK = false;
+                else {
+                    for (let i = 0; i < selElems.length; i++ ) {
+                        if (!List2.includes(selElems[i].innerText)) {
+                            allOK = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            
+            if (allOK)
+                document.getElementById("Result").innerText = "Correct Answers";
+            else
+            document.getElementById("Result").innerText = "Wrong Answers";
+        }
+
+        function setOutline(elem) {
+            let intPattern = intSelPattern;
+            if (intPattern == -1) {
+                clearClasses(elem);
+            }
+            else {
+                let strCssName = getClassName(intPattern);
+                let strClasses = elem.className;
+                if (!strClasses.includes(strCssName)) {
+                    strClasses = clear(strClasses);
+                    elem.className = strClasses + " " + strCssName;
+                }
+            }
+        }
+
+        function getClassName(intPattern) {
+            var strCssName = "";
+            switch (intPattern)
+            {
+                case 0: strCssName = "dots";
+                        break;
+                case 1: strCssName = "around";
+                        break;
+                case 2: strCssName = "dashes";
+                        break;
+                case 3: strCssName = "thick";
+                        break;
+            }
+            return strCssName;
+        }
+
+        function clearClasses(elem) {
+            var strClasses = elem.className;
+            elem.className = clear(strClasses);
+        }
+
+        function clear(strClasses) {
+            strClasses = strClasses.replace("dots", "").replace("around", "").replace("dashes", "").replace("thick", "");
+            return strClasses;
+        }
+
+        function clearAll() {
+            var allElems = document.getElementsByTagName("p");
+            var i;
+            for (i = 0; i < allElems.length; i++ ) {
+                clearClasses(allElems[i]);
+            }
+        }
+    </script>
+</head>
+<body onload="displayWords()">
+    <div class="sidenav">
+        <button onclick="intSelPattern = 0;">Noun</button>
+        <button onclick="intSelPattern = 2;">Verb</button>
+        <button onclick="intSelPattern = -1;">Clear</button>
+        <button onclick="clearAll()">Clear All</button>
+        <button onclick="checkWords()">Verify</button>
+        <label id="Result" class="result"></label>
+    </div>
+
+    <div class="content">
+        <h2>Sort these words into Nouns and Verbs</h2>
+        <table>
+            <tr>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Swim</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">study</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">TV</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Heart</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Run</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Jayden</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Hop</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Siri</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Siri</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Hop</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Siri</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Siri</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Hop</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Siri</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Siri</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Hop</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Siri</p>
+                </td>
+                <td>
+                    <p class="setWidth" onclick="setOutline(this);">Siri</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
